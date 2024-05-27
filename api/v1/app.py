@@ -4,6 +4,7 @@ import os
 from flask import Flask
 from models import storage
 from api.v1.views import app_views
+from flask import jsonify
 HBNB_MYSQL_USER = os.getenv("HBNB_MYSQL_USER", "hbnb_dev")
 HBNB_MYSQL_PWD = os.getenv("HBNB_MYSQL_PWD", "hbnb_dev_pwd")
 HBNB_MYSQL_HOST = os.getenv("HBNB_MYSQL_HOST", "localhost")
@@ -14,6 +15,10 @@ app.register_blueprint(app_views)
 def close_stroage(exception=None):
 	"""declare a method to handle"""
 	storage.close()
+@app.route('/api/v1/nop', methods=['GET'])
+def err():
+	"""create a handler for 404"""
+	return jsonify({ "error": "Not found"})
 if __name__ == "__main__":
 	""" run your Flask server"""
 	host = os.getenv("HBNB_API_HOST", "0.0.0.0")
