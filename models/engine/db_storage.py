@@ -87,5 +87,4 @@ class DBStorage:
         if cls is None:
             return (None)
         else:
-            return self.session.query(cls).count()
-			
+            return self.__session.query(cls).count()	
