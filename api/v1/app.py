@@ -4,7 +4,6 @@ import os
 from flask import Flask, abort, jsonify
 from models import storage
 from api.v1.views import app_views
-
 HBNB_MYSQL_USER = os.getenv("HBNB_MYSQL_USER", "hbnb_dev")
 HBNB_MYSQL_PWD = os.getenv("HBNB_MYSQL_PWD", "hbnb_dev_pwd")
 HBNB_MYSQL_HOST = os.getenv("HBNB_MYSQL_HOST", "localhost")
