@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""Create an endpoint that retrieves the number of each objects by type"""
+"""
+Create an endpoint that retrieves the number of each objects by type
+"""
 from models import storage
 from models.user import User
 from models.state import State
@@ -11,11 +13,15 @@ from flask import jsonify
 from api.v1.views import app_views
 @app_views.route('/status', methods=['GET'])
 def view():
-	"""create a route /status on the object"""
+	"""
+	create a route /status on the object
+	"""
 	return jsonify({"status": "OK"})
 @app_views.route('/stats', methods=['GET'])
 def stats():
-	"""Create an endpoint that retrieves the number """
+	"""
+	Create an endpoint that retrieves the number
+	"""
 	stats = {}
 	stats["amenities"] = storage.count(Amenity)
 	stats["cities"] = storage.count(City)
