@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Create a new view for State objects that handles all default RESTFul API action"""
 from flask import Flask, jsonify, abort
-from models.state import State
+from models.city import City
 from models import storage
 from api.v1.views import app_views
 @app_views.route('/states/<state_id>/cities', methods=['GET'], strict_slashes=False)
