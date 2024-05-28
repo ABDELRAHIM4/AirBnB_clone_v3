@@ -72,18 +72,16 @@ class FileStorage:
         """Returns the object based on the class and its ID, or None if not found"""
         if cls is None or id is None:
             return (None)
-        else:
-            obj_d = self.all(cls)
-            if id in obj_d:
-                return (obj_d[id])
-            return (None)
+        elif cls in classes.values():
+            num = self.all(cls)
+            for value in num.items():
+                if value.id == id:
+                    return (value)
     def count(self, cls=None):
         """Returns the number of objects in storage matching"""
-        if cls is None:
+        if not cls:
             return (len(self.all()))
-        else:
-            count = 0
-            for obj in self.all().values():
-                if isinstance(obj, cls):
-                    count += 1
-            return (count)
+        elif cls in classes.values():
+            fun = self.all(cls)
+            return (len(fun))
+        return (None)

@@ -13,7 +13,7 @@ from models.state import State
 from models.user import User
 from os import getenv
 import sqlalchemy
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, func
 from sqlalchemy.orm import scoped_session, sessionmaker
 
 classes = {"Amenity": Amenity, "City": City,
@@ -79,12 +79,18 @@ class DBStorage:
         if cls is None or id is None:
             return None
         else:
-            obj = self.__session.query(cls).filter(cls.id == id).first()
-            self.save(obj)
-            return (obj)
+            if cls in classes.values():
+                obj = self.all(cls)
+                for key, value in obj.items():
+                    if key.split('.')[1] == id:
+                        return (value)
     def count(self, cls=None):
         """Returns the number of objects in storage matching"""
-        if cls is None:
-            return (len(self.all()))
+        if not cls:
+            num = self.all()
+            return len(num)
         else:
-            return (len([obj for obj in self.all().values() if isinstance(obj, cls)]))
+            if cls in classes.values():
+                fun = self.all(cls)
+                return len(fun)
+            return None
