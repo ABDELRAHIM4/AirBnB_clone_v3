@@ -2,6 +2,7 @@
 """create a variable app, instance of Flask"""
 import os
 from flask import Flask, abort, jsonify
+from flask_cors import CORS
 from models import storage
 from api.v1.views import app_views
 HBNB_MYSQL_USER = os.getenv("HBNB_MYSQL_USER", "hbnb_dev")
@@ -10,7 +11,7 @@ HBNB_MYSQL_HOST = os.getenv("HBNB_MYSQL_HOST", "localhost")
 HBNB_MYSQL_DB = os.getenv("HBNB_MYSQL_DB", "hbnb_dev_db")
 app = Flask(__name__)
 app.register_blueprint(app_views)
-
+CORS(app, resources={r"\*": {"origins" : "*"}})
 
 @app.teardown_appcontext
 def close_stroage(exception=None):
