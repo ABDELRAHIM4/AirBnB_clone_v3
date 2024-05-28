@@ -1,13 +1,12 @@
 #!/usr/bin/python3
-"""Create a new view for State objects that handles all default RESTFul API action"""
+"""Create a new view for Amenity objects that handles all default RESTFul API action"""
 from flask import Flask, jsonify, abort
-from models.amentiy import Amenity
 from models import storage
 from api.v1.views import app_views
 @app_views.route('/amenities', methods=['GET'], strict_slashes=False)
-def get_amen():
+def get_amens():
     """Create a new view for State"""
-    amens = Amenity.all()
+    amens = storage.all('Amenity').values()
     return (jsonify([amen.to_dict() for amen in amens]))
 @app_views.route('/amenities/<amenity_id>', methods=['GET'], strict_slashes=False)
 def get_amen(amenity_id):
